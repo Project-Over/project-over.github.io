@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Over</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        #countdown {
+            font-size: 2rem;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project: Over</h1>
+    <div id="countdown">Loading...</div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('January 1, 2025 10:00:00 CST').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (difference < 0) {
+                clearInterval(timer);
+                document.getElementById('countdown').innerHTML = 'Project is Over!';
+            }
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to avoid delay
+    </script>
+</body>
+</html>
